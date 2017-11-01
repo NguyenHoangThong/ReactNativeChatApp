@@ -5,14 +5,20 @@ import {
     StyleSheet,
     TextInput
 } from 'react-native'
+import Logo from './Logo';
+import SignupSection from './SignupSection';
+import ButtonSubmit from './ButtonSubmit';
+import Form from './Form';
+
 
 class LoginPresentation extends Component<{}> {
     render(){
         return(
             <View style={styles.container}>
-                <TextInput
-
-                />
+                <Logo />
+                <Form />
+                <SignupSection/>
+                <ButtonSubmit/>
             </View>
         )
     }
@@ -22,20 +28,7 @@ export default LoginPresentation;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
         backgroundColor: '#26abf3',
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-        color: '#ffffff',
-    },
-    input: {
-        margin: 15,
-        height: 40,
-        borderColor: '#4af4ec',
-        borderWidth: 1
+        alignItems: 'center',
     }
 });
