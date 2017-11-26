@@ -15,38 +15,9 @@ import data from '../Data';
 import Navbar from '../Navbar/Navbar';
 const {width, height} = Dimensions.get('window');
 
-var superheroArray = ["Superman","Batman","Wonder Woman","The Flash","Aquaman","Green Lantern"];
 
 class FriendListPresentation extends Component<{}> {
-    // constructor(props) {
-    //     super(props);
-    //     var dataSource = new ListView.DataSource({rowHasChanged:(r1,r2) => r1.guid != r2.guid});
-    //     this.state = {
-    //         dataSource: dataSource.cloneWithRows(superheroArray)
-    //     }
-    // }
-    //
-    // renderRow(rowData) {
-    //     return (
-    //         <TouchableHighlight underlayColor='#dddddd' style={{height:44}}>
-    //             <View>
-    //                 <Text style={{fontSize: 20, color: '#000000'}} numberOfLines={1}>{rowData}</Text>
-    //                 <View style={{height: 1, backgroundColor: '#dddddd'}}/>
-    //             </View>
-    //         </TouchableHighlight>
-    //     );
-    // }
-    //
-    // render() {
-    //
-    //     return(
-    //         <View>
-    //             <Navbar/>
-    //             <ListView dataSource={this.state.dataSource} renderRow={this.renderRow.bind(this)}>
-    //             </ListView>
-    //         </View>
-    //     );
-    // }
+
     constructor(props){
         super(props)
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
@@ -61,66 +32,66 @@ class FriendListPresentation extends Component<{}> {
         }
     }
 
-    showMenu(){
-        if(this.state.isOpenMenu){
-            this.setState({isOpenMenu: false})
-            Animated.parallel([
-                Animated.timing(
-                    this.state.translateX, {
-                        toValue: width
-                    }
-                ),
-                Animated.timing(
-                    this.state.rotateY, {
-                        toValue: 0
-                    }
-                )
-            ]).start()
-        } else {
-            this.setState({isOpenMenu: true})
-            Animated.parallel([
-                Animated.timing(
-                    this.state.translateX, {
-                        toValue: width * 0.60
-                    }
-                ),
-                Animated.timing(
-                    this.state.rotateY, {
-                        toValue: 1
-                    }
-                ),
-                Animated.timing(
-                    this.state.menuAnimation, {
-                        toValue: 1,
-                        duration: 800
-                    }
-                )
-            ]).start()
-        }
-    }
-
-    closeMenu(){
-        this.setState({isOpenMenu: false})
-        Animated.parallel([
-            Animated.timing(
-                this.state.translateX, {
-                    toValue: width
-                }
-            ),
-            Animated.timing(
-                this.state.rotateY, {
-                    toValue: 0
-                }
-            ),
-            Animated.timing(
-                this.state.menuAnimation, {
-                    toValue: 0,
-                    duration: 300
-                }
-            )
-        ]).start()
-    }
-
+    // showMenu(){
+    //     if(this.state.isOpenMenu){
+    //         this.setState({isOpenMenu: false})
+    //         Animated.parallel([
+    //             Animated.timing(
+    //                 this.state.translateX, {
+    //                     toValue: width
+    //                 }
+    //             ),
+    //             Animated.timing(
+    //                 this.state.rotateY, {
+    //                     toValue: 20
+    //                 }
+    //             )
+    //         ]).start()
+    //     } else {
+    //         this.setState({isOpenMenu: true})
+    //         Animated.parallel([
+    //             Animated.timing(
+    //                 this.state.translateX, {
+    //                     toValue: width * 0.60
+    //                 }
+    //             ),
+    //             Animated.timing(
+    //                 this.state.rotateY, {
+    //                     toValue: 1
+    //                 }
+    //             ),
+    //             Animated.timing(
+    //                 this.state.menuAnimation, {
+    //                     toValue: 1,
+    //                     duration: 800
+    //                 }
+    //             )
+    //         ]).start()
+    //     }
+    // }
+    //
+    // closeMenu(){
+    //     this.setState({isOpenMenu: false})
+    //     Animated.parallel([
+    //         Animated.timing(
+    //             this.state.translateX, {
+    //                 toValue: width
+    //             }
+    //         ),
+    //         Animated.timing(
+    //             this.state.rotateY, {
+    //                 toValue: 0
+    //             }
+    //         ),
+    //         Animated.timing(
+    //             this.state.menuAnimation, {
+    //                 toValue: 0,
+    //                 duration: 300
+    //             }
+    //         )
+    //     ]).start()
+    // }
+    //
     renderRow(rowData){
         const img = rowData.image
         return (
@@ -143,6 +114,7 @@ class FriendListPresentation extends Component<{}> {
             </TouchableHighlight>
         )
     }
+
     filterSearch(text){
         const newData = data.filter(function(item){
             const itemData = item.username.toUpperCase()
@@ -160,7 +132,7 @@ class FriendListPresentation extends Component<{}> {
                 <Animated.View
                     style={[styles.content, {
                         width: width,
-                        backgroundColor: 'gray',
+                        backgroundColor: '#000fff',
                         flex: 1,
                         transform: [
                             {
@@ -181,7 +153,8 @@ class FriendListPresentation extends Component<{}> {
                         ]
                     }]}
                 >
-                    {this.state.isOpenMenu ? <Navbar icon="times" showMenu={this.closeMenu.bind(this)}/> : <Navbar icon="bars" showMenu={this.showMenu.bind(this)}/>}
+                    {/*{this.state.isOpenMenu ? <Navbar icon="times" showMenu={this.closeMenu.bind(this)}/> : <Navbar icon="bars" showMenu={this.showMenu.bind(this)}/>}*/}
+                    <Navbar icon="bars" />
                     <TextInput
                         style={styles.textInput}
                         onChangeText={(text) => this.filterSearch(text)}
@@ -217,26 +190,15 @@ class FriendListPresentation extends Component<{}> {
 export default FriendListPresentation;
 
 const styles = StyleSheet.create({
-    // container: {
-    //     flex: 1,
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    //     backgroundColor: '#000000',
-    // },
-    // welcome: {
-    //     fontSize: 20,
-    //     textAlign: 'center',
-    //     margin: 10,
-    //     color: '#ffffff',
-    // },
+
     container: {
         flex: 1,
-        backgroundColor: '#555566'
+        backgroundColor: '#26abf3'
     },
     textInput: {
         height: 30,
         borderWidth: 1,
-        borderColor: '#cecece',
+        borderColor: '#43fffa',
         marginBottom: 10,
         marginHorizontal: 10
     },
@@ -247,7 +209,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         paddingHorizontal: 10,
         paddingVertical: 10,
-        backgroundColor: '#555566'
+        backgroundColor: '#26abf3'
     },
     imageAvatar: {
         width: 50,
@@ -259,7 +221,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 10
     },
     text: {
-        color: '#fff'
+        color: '#f8fff4'
     },
     containerCell: {
         marginBottom: 10
@@ -268,7 +230,9 @@ const styles = StyleSheet.create({
         fontSize: 13
     },
     textBy: {
-        fontSize: 12
+        fontSize: 20,
+        margin: 10,
+        flexWrap: 'wrap'
     },
     textMenu: {
         fontSize: 20,

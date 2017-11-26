@@ -28,7 +28,7 @@ export default LoginPresentation;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#26abf3',
+        backgroundColor: '#43fffa',
         alignItems: 'center',
     }
 });

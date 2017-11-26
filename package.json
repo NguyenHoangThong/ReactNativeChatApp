@@ -10,9 +10,11 @@
 		"prop-types": "^15.6.0",
 		"react": "16.0.0-beta.5",
 		"react-native": "0.49.5",
+		"react-native-gifted-chat": "^0.3.0",
 		"react-native-router-flux": "^4.0.0-beta.22",
 		"react-native-vector-icons": "^4.4.2",
-		"watchman": "^0.1.8"
+		"watchman": "^0.1.8",
+		"socket.io-client": "^2.0.4"
 	},
 	"devDependencies": {
 		"babel-jest": "21.2.0",
