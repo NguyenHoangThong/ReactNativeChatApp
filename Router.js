@@ -17,19 +17,21 @@ class Routers extends Component<{}> {
         return (
             <Router>
                 <Scene key='root'>
-                    <Scene key='login' component={Login} initial/>
+                    <Scene key='login' component={Login} hideNavBar={true}/>
                     <Scene
                         key='tabbar'
                         tabs={true}
                         tabBarStyle={{ backgroundColor: '#FFFFFF' }}
                         hideNavBar={true}
                         tabBarPosition={'bottom'}
+                        initial
                     >
-                        <Scene key='find' title='Find'  >
+                        <Scene key='find' title='Find'   >
                             <Scene
                                 key="test"
                                 component={FriendList}
                                 title="Scarlet"
+                                hideNavBar={true}
                             />
                         </Scene>
 
@@ -38,6 +40,7 @@ class Routers extends Component<{}> {
                                 key="test3"
                                 component={FindFriend}
                                 title="Sssss"
+                                hideNavBar={true}
                             />
                         </Scene>
                     </Scene>
