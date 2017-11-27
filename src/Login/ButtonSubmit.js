@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Dimensions from 'Dimensions';
 import {
     StyleSheet,
@@ -18,8 +19,8 @@ const DEVICE_HEIGHT = Dimensions.get('window').height;
 const MARGIN = 40;
 
 class ButtonSubmit extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             isLoading: false,
@@ -28,10 +29,14 @@ class ButtonSubmit extends Component {
         this.buttonAnimated = new Animated.Value(0);
         this.growAnimated = new Animated.Value(0);
         this._onPress = this._onPress.bind(this);
-    }
+    };
+
+
 
     _onPress() {
         if (this.state.isLoading) return;
+        //method post login
+        //true = success
 
         this.setState({ isLoading: true });
         Animated.timing(
@@ -48,11 +53,13 @@ class ButtonSubmit extends Component {
         }, 2000);
 
         setTimeout(() => {
-            //Actions.secondScreen();
-            alert("change screen ok");
+            Actions.tabbar();
+            // alert("change screen ok");
             this.setState({ isLoading: false });
             this.buttonAnimated.setValue(0);
             this.growAnimated.setValue(0);
+            alert(this.props.username);
+
         }, 2300);
     }
 
@@ -78,7 +85,8 @@ class ButtonSubmit extends Component {
         });
 
         return (
-            <View style={styles.container}>
+            <View style={styles.container} username={this.props.username}
+                                           password={this.props.password}>
                 <Animated.View style={{width: changeWidth}}>
                     <TouchableOpacity style={styles.button}
                                       onPress={this._onPress}
@@ -95,7 +103,10 @@ class ButtonSubmit extends Component {
         );
     }
 }
-
+ButtonSubmit.propTypes = {
+    username: PropTypes.string,
+    password: PropTypes.string
+};
 const styles = StyleSheet.create({
     container: {
         flex: 1,

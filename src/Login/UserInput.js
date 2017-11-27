@@ -23,19 +23,22 @@ class UserInput extends Component {
                           autoCapitalize={this.props.autoCapitalize}
                           returnKeyType={this.props.returnKeyType}
                           placeholderTextColor='white'
-                          underlineColorAndroid='transparent' />
+                          underlineColorAndroid='transparent'
+                          onChangeText = {this.props.onTextChange}
+               />
            </View>
        );
    }
 }
 
 UserInput.propTypes = {
+    onTextChange: PropTypes.func.isRequired,
     source: PropTypes.number.isRequired,
     placeholder: PropTypes.string.isRequired,
     secureTextEntry: PropTypes.bool,
     autoCorrect: PropTypes.bool,
     autoCapitalize: PropTypes.string,
-    returnKeyType: PropTypes.string,
+    returnKeyType: PropTypes.string
 };
 
 

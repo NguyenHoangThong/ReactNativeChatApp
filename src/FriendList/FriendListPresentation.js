@@ -14,6 +14,7 @@ import {
 import data from '../Data';
 import Navbar from '../Navbar/Navbar';
 const {width, height} = Dimensions.get('window');
+import { Actions, ActionConst } from 'react-native-router-flux';
 
 
 class FriendListPresentation extends Component<{}> {

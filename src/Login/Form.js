@@ -6,6 +6,7 @@ import {
     TouchableOpacity,
     Image,
 } from 'react-native';
+import PropTypes from 'prop-types';
 
 import UserInput from './UserInput';
 
@@ -18,30 +19,34 @@ class Form extends Component {
         super(props);
         this.state = {
             showPass: true,
-            press: false,
+            press: false
         };
         this.showPass = this.showPass.bind(this);
-    }
+    };
+
 
     showPass() {
         this.state.press === false ? this.setState({ showPass: false, press: true }) :this.setState({ showPass: true, press: false });
-    }
+    };
 
     render() {
         return (
             <KeyboardAvoidingView behavior='padding'
+
                                   style={styles.container}>
                 <UserInput source={usernameImg}
                            placeholder='Username'
                            autoCapitalize={'none'}
                            returnKeyType={'done'}
-                           autoCorrect={false} />
+                           autoCorrect={false}
+                           onTextChange={this.props.handleUsername} />
                 <UserInput source={passwordImg}
                            secureTextEntry={this.state.showPass}
                            placeholder='Password'
                            returnKeyType={'done'}
                            autoCapitalize={'none'}
-                           autoCorrect={false} />
+                           autoCorrect={false}
+                           onTextChange={this.props.handlePassword} />
                 <TouchableOpacity
                     activeOpacity={0.7}
                     style={styles.btnEye}
@@ -53,7 +58,10 @@ class Form extends Component {
         );
     }
 }
-
+Form.propTypes = {
+    handlePassword: PropTypes.func.isRequired,
+    handleUsername: PropTypes.func.isRequired
+};
 const DEVICE_WIDTH = Dimensions.get('window').width;
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 

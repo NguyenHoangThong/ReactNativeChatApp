@@ -14,6 +14,7 @@ import {
 import data from '../Data';
 import Navbar from '../Navbar/Navbar';
 const {width, height} = Dimensions.get('window');
+import { Actions, ActionConst } from 'react-native-router-flux';
 
 
 class FindFriendPresentation extends Component<{}> {
@@ -92,11 +93,18 @@ class FindFriendPresentation extends Component<{}> {
         ]).start()
     }
 
+    // _onPress() {
+    //     Actions.chat({username: });
+    // }
+
     renderRow(rowData){
-        const img = rowData.image
+        const img = rowData.image;
+        _onPress= () =>{
+            Actions.chat({username: rowData.username});
+        }
         return (
             <TouchableHighlight style={styles.containerCell}
-
+                onPress={_onPress}
             >
                 <View>
                     <View style={styles.footerContainer}>

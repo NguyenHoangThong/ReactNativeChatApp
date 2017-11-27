@@ -18,7 +18,7 @@ class ChatPresentation extends React.Component {
         this.onSend = this.onSend.bind(this);
         this._storeMessages = this._storeMessages.bind(this);
 
-        this.socket = SocketIOClient('http://192.168.1.12:3000', { transports: ['websocket'] });
+        this.socket = SocketIOClient('http://192.168.1.12:3001', { transports: ['websocket'] });
         this.socket.on('message', this.onReceivedMessage);
         this.determineUser();
     }
@@ -29,6 +29,7 @@ class ChatPresentation extends React.Component {
      * Set the userId to the component's state.
      */
     determineUser() {
+        alert(this.props.username);
         AsyncStorage.getItem(USER_ID)
             .then((userId) => {
                 // If there isn't a stored userId, then fetch one from the server.
