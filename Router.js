@@ -18,25 +18,24 @@ class Routers extends Component<{}> {
         return (
             <Router>
                 <Scene key='root' style={{ backgroundColor:'#000fff'}}>
-                    <Scene key='login' component={Login} hideNavBar={true} initial/>
+                    <Scene key='login' component={Login} hideNavBar={true} />
                     <Scene
                         key='tabbar'
                         tabs={true}
                         tabBarStyle={{ backgroundColor: '#FFFFFF' }}
                         hideNavBar={true}
                         tabBarPosition={'bottom'}
+                        initial
                     >
-                        <Scene key='users' icon={TabIcon} >
+                        <Scene key='user' icon={TabIcon} >
                             <Scene
-                                key="test"
                                 component={FriendList}
                                 hideNavBar={true}
                             />
                         </Scene>
 
-                        <Scene key='find' >
+                        <Scene key='find' icon={TabIcon}>
                             <Scene
-                                key="test3"
                                 component={FindFriend}
                                 hideNavBar={true}
                             />

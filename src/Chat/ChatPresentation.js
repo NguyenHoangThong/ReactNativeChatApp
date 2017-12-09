@@ -2,6 +2,15 @@ import React from 'react';
 import { View, Text, AsyncStorage } from 'react-native';
 import SocketIOClient from 'socket.io-client';
 import { GiftedChat } from 'react-native-gifted-chat';
+import {
+    Avatar,
+    Header,
+    SearchBar,
+    Icon,
+    List,
+    ListItem
+} from 'react-native-elements';
+import { Actions, ActionConst } from 'react-native-router-flux';
 
 const USER_ID = '@userId';
 
@@ -10,7 +19,8 @@ class ChatPresentation extends React.Component {
         super(props);
         this.state = {
             messages: [],
-            userId: null
+            userId: null,
+            userName: this.props.username
         };
 
         this.determineUser = this.determineUser.bind(this);
@@ -23,13 +33,36 @@ class ChatPresentation extends React.Component {
         this.determineUser();
     }
 
+
+    async checkToken(){
+        try {
+            const value = await AsyncStorage.getItem('token');
+            return value;
+        } catch (error) {
+            // Error retrieving data
+        }
+    }
+
+
+    iconComponent(){
+        return (
+            <Icon
+                name="arrow-back"
+                size={30}
+                color="#4F8EF7"
+                onPress={() =>{
+                    Actions.tabbar();
+                }}
+            />
+        );
+    }
     /**
      * When a user joins the chatroom, check if they are an existing user.
      * If they aren't, then ask the server for a userId.
      * Set the userId to the component's state.
      */
     determineUser() {
-        alert(this.props.username);
+        alert(this.state.userName);
         AsyncStorage.getItem(USER_ID)
             .then((userId) => {
                 // If there isn't a stored userId, then fetch one from the server.
@@ -65,14 +98,32 @@ class ChatPresentation extends React.Component {
     }
 
     render() {
-        var user = { _id: this.state.userId || -1 };
-
+        this.checkToken().then((value) => {
+            if(value === null){
+                Actions.login();
+            }
+        });
+        let user = { _id: this.state.userId || -1 };
+        let username = this.state.userName || "";
         return (
-            <GiftedChat
-                messages={this.state.messages}
-                onSend={this.onSend}
-                user={user}
-            />
+            <View style={{
+                flex: 1,
+                backgroundColor: '#26abf3'
+            }}>
+                <Header
+                    leftComponent={this.iconComponent()}
+                    centerComponent={{ text: username, style: { color: '#fff' } }}
+                    rightComponent={{ icon: 'home', color: '#fff' }}
+                />
+
+                <GiftedChat
+                    messages={this.state.messages}
+                    onSend={this.onSend}
+                    user={user}
+                />
+            </View>
+
+
         );
     }
 

@@ -9,6 +9,7 @@ import {
     Easing,
     Image,
     View,
+    AsyncStorage
 } from 'react-native';
 import { Actions, ActionConst } from 'react-native-router-flux';
 
@@ -32,7 +33,34 @@ class ButtonSubmit extends Component {
     };
 
 
+    _login(){
+        AsyncStorage.setItem('token', 'abcd');
+        // const json = JSON.stringify(data)
+        // fetch('http://localhost:3000/users/login', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         Accept: 'application/json'
+        //     },
+        //     body: json
+        // })
+        //     .then((response) => response.json())
+        //     .then((res) => {
+        //         if (res.error) {
+        //             alert(res.error)
+        //         } else {
+        //             AsyncStorage.setItem('token', res.token)
+        //             alert(`Success! You may now access protected content.`)
+        //             // Redirect to home screen
+        //
+        //         }
+        //     })
+        //     .catch(() => {
+        //         alert('There was an error logging in.');
+        //     })
+        //     .done()
 
+    }
     _onPress() {
         if (this.state.isLoading) return;
         //method post login
@@ -51,6 +79,7 @@ class ButtonSubmit extends Component {
         setTimeout(() => {
             this._onGrow();
         }, 2000);
+        this._login();
 
         setTimeout(() => {
             Actions.tabbar();
